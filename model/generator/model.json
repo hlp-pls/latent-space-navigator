@@ -1,0 +1,682 @@
+{
+    "modelTopology": {
+        "keras_version": "2.1.4",
+        "model_config": {
+            "config": {
+                "layers": [
+                    {
+                        "config": {
+                            "dtype": "float32",
+                            "sparse": false,
+                            "name": "input_6",
+                            "batch_input_shape": [
+                                null,
+                                2
+                            ]
+                        },
+                        "inbound_nodes": [],
+                        "class_name": "InputLayer",
+                        "name": "input_6"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "units": 100,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "activation": "relu",
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_regularizer": null,
+                            "kernel_constraint": null,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "bias_regularizer": null,
+                            "use_bias": true,
+                            "name": "dense_15"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "input_6",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Dense",
+                        "name": "dense_15"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "units": 2048,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "activation": "relu",
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_regularizer": null,
+                            "kernel_constraint": null,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "bias_regularizer": null,
+                            "use_bias": true,
+                            "name": "dense_16"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "dense_15",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Dense",
+                        "name": "dense_16"
+                    },
+                    {
+                        "config": {
+                            "trainable": true,
+                            "name": "reshape_6",
+                            "target_shape": [
+                                128,
+                                4,
+                                4
+                            ]
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "dense_16",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Reshape",
+                        "name": "reshape_6"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_size": [
+                                3,
+                                3
+                            ],
+                            "kernel_regularizer": null,
+                            "padding": "valid",
+                            "kernel_constraint": null,
+                            "filters": 64,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "data_format": "channels_last",
+                            "bias_regularizer": null,
+                            "strides": [
+                                1,
+                                1
+                            ],
+                            "use_bias": true,
+                            "activation": "linear",
+                            "name": "conv2d_transpose_1"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "reshape_6",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Conv2DTranspose",
+                        "name": "conv2d_transpose_1"
+                    },
+                    {
+                        "config": {
+                            "trainable": true,
+                            "gamma_constraint": null,
+                            "center": true,
+                            "name": "batch_normalization_12",
+                            "beta_constraint": null,
+                            "gamma_initializer": {
+                                "config": {},
+                                "class_name": "Ones"
+                            },
+                            "moving_variance_initializer": {
+                                "config": {},
+                                "class_name": "Ones"
+                            },
+                            "beta_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "beta_regularizer": null,
+                            "moving_mean_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "epsilon": 0.001,
+                            "gamma_regularizer": null,
+                            "axis": -1,
+                            "momentum": 0.99,
+                            "scale": true
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "conv2d_transpose_1",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "BatchNormalization",
+                        "name": "batch_normalization_12"
+                    },
+                    {
+                        "config": {
+                            "alpha": 0.30000001192092896,
+                            "trainable": true,
+                            "name": "leaky_re_lu_12"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "batch_normalization_12",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "LeakyReLU",
+                        "name": "leaky_re_lu_12"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_size": [
+                                3,
+                                3
+                            ],
+                            "kernel_regularizer": null,
+                            "padding": "valid",
+                            "kernel_constraint": null,
+                            "filters": 32,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "data_format": "channels_last",
+                            "bias_regularizer": null,
+                            "strides": [
+                                1,
+                                1
+                            ],
+                            "use_bias": true,
+                            "activation": "linear",
+                            "name": "conv2d_transpose_2"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "leaky_re_lu_12",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Conv2DTranspose",
+                        "name": "conv2d_transpose_2"
+                    },
+                    {
+                        "config": {
+                            "trainable": true,
+                            "gamma_constraint": null,
+                            "center": true,
+                            "name": "batch_normalization_13",
+                            "beta_constraint": null,
+                            "gamma_initializer": {
+                                "config": {},
+                                "class_name": "Ones"
+                            },
+                            "moving_variance_initializer": {
+                                "config": {},
+                                "class_name": "Ones"
+                            },
+                            "beta_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "beta_regularizer": null,
+                            "moving_mean_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "epsilon": 0.001,
+                            "gamma_regularizer": null,
+                            "axis": -1,
+                            "momentum": 0.99,
+                            "scale": true
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "conv2d_transpose_2",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "BatchNormalization",
+                        "name": "batch_normalization_13"
+                    },
+                    {
+                        "config": {
+                            "alpha": 0.30000001192092896,
+                            "trainable": true,
+                            "name": "leaky_re_lu_13"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "batch_normalization_13",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "LeakyReLU",
+                        "name": "leaky_re_lu_13"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_size": [
+                                3,
+                                3
+                            ],
+                            "kernel_regularizer": null,
+                            "padding": "valid",
+                            "kernel_constraint": null,
+                            "filters": 1,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "data_format": "channels_last",
+                            "bias_regularizer": null,
+                            "strides": [
+                                1,
+                                1
+                            ],
+                            "use_bias": true,
+                            "activation": "linear",
+                            "name": "conv2d_transpose_3"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "leaky_re_lu_13",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Conv2DTranspose",
+                        "name": "conv2d_transpose_3"
+                    },
+                    {
+                        "config": {
+                            "trainable": true,
+                            "name": "flatten_5"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "conv2d_transpose_3",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Flatten",
+                        "name": "flatten_5"
+                    },
+                    {
+                        "config": {
+                            "bias_constraint": null,
+                            "units": 784,
+                            "activity_regularizer": null,
+                            "trainable": true,
+                            "activation": "sigmoid",
+                            "bias_initializer": {
+                                "config": {},
+                                "class_name": "Zeros"
+                            },
+                            "kernel_regularizer": null,
+                            "kernel_constraint": null,
+                            "kernel_initializer": {
+                                "config": {
+                                    "seed": null,
+                                    "mode": "fan_avg",
+                                    "distribution": "uniform",
+                                    "scale": 1.0
+                                },
+                                "class_name": "VarianceScaling"
+                            },
+                            "bias_regularizer": null,
+                            "use_bias": true,
+                            "name": "dense_17"
+                        },
+                        "inbound_nodes": [
+                            [
+                                [
+                                    "flatten_5",
+                                    0,
+                                    0,
+                                    {}
+                                ]
+                            ]
+                        ],
+                        "class_name": "Dense",
+                        "name": "dense_17"
+                    }
+                ],
+                "input_layers": [
+                    [
+                        "input_6",
+                        0,
+                        0
+                    ]
+                ],
+                "name": "model_7",
+                "output_layers": [
+                    [
+                        "dense_17",
+                        0,
+                        0
+                    ]
+                ]
+            },
+            "class_name": "Model"
+        },
+        "backend": "tensorflow"
+    },
+    "weightsManifest": [
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        64
+                    ],
+                    "name": "batch_normalization_12/gamma"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        64
+                    ],
+                    "name": "batch_normalization_12/beta"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        64
+                    ],
+                    "name": "batch_normalization_12/moving_mean"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        64
+                    ],
+                    "name": "batch_normalization_12/moving_variance"
+                }
+            ],
+            "paths": [
+                "./group1-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        32
+                    ],
+                    "name": "batch_normalization_13/gamma"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        32
+                    ],
+                    "name": "batch_normalization_13/beta"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        32
+                    ],
+                    "name": "batch_normalization_13/moving_mean"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        32
+                    ],
+                    "name": "batch_normalization_13/moving_variance"
+                }
+            ],
+            "paths": [
+                "./group2-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        3,
+                        3,
+                        64,
+                        4
+                    ],
+                    "name": "conv2d_transpose_1/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        64
+                    ],
+                    "name": "conv2d_transpose_1/bias"
+                }
+            ],
+            "paths": [
+                "./group3-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        3,
+                        3,
+                        32,
+                        64
+                    ],
+                    "name": "conv2d_transpose_2/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        32
+                    ],
+                    "name": "conv2d_transpose_2/bias"
+                }
+            ],
+            "paths": [
+                "./group4-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        3,
+                        3,
+                        1,
+                        32
+                    ],
+                    "name": "conv2d_transpose_3/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        1
+                    ],
+                    "name": "conv2d_transpose_3/bias"
+                }
+            ],
+            "paths": [
+                "./group5-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        2,
+                        100
+                    ],
+                    "name": "dense_15/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        100
+                    ],
+                    "name": "dense_15/bias"
+                }
+            ],
+            "paths": [
+                "./group6-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        100,
+                        2048
+                    ],
+                    "name": "dense_16/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        2048
+                    ],
+                    "name": "dense_16/bias"
+                }
+            ],
+            "paths": [
+                "./group7-shard1of1"
+            ]
+        },
+        {
+            "weights": [
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        1340,
+                        784
+                    ],
+                    "name": "dense_17/kernel"
+                },
+                {
+                    "dtype": "float32",
+                    "shape": [
+                        784
+                    ],
+                    "name": "dense_17/bias"
+                }
+            ],
+            "paths": [
+                "./group8-shard1of2",
+                "./group8-shard2of2"
+            ]
+        }
+    ]
+}
