@@ -36,7 +36,7 @@ async function drawL(_x, _y) {
     ]);
     //console.log(latent_sample);
     // 3 //
-    const img = await MODEL.predict(latent_sample).mul(tf.scalar(255.0));
+    const img = await MODEL.predict(latent_sample);
     //console.log(img);
     // 4 //
     const pixels = img.dataSync(); //tensor to pixel
