@@ -8,10 +8,21 @@
 </head>
 <body>
 	<div class="button_container">
-		<button id="explore">EXPLORE</button>
-		<button id="clear">CLEAR</button>
+		<select name="MODE" id="mode_select">
+			<option value="" disabled selected>MODES</option>
+		   	<option value="LINE">LINE</option>
+		   	<option value="VECTOR">VECTOR</option>
+		</select>
+		<button id="explore" style="display: none;">EXPLORE</button>
+		<button id="see_vector" style="display: none;">SEE VECTOR</button>
+		<button id="clear" style="display: none;">CLEAR</button>
+		<div id="img_container" style="display: none;">
+			<img src="" alt="FROM" id="from_img"></img>
+			<img src="" alt="TO" id="to_img"></img>
+		</div>
 	</div>
 	<div id="canvas_container"></div>
+	
 	<script src="./js/sketch_0_2.js"></script>
 </body>
 </html>
