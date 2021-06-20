@@ -23,7 +23,7 @@ var px = 0, py = 0;
 
 //load model
 async function loadModel() {
-    MODEL = await tf.loadLayersModel('./model/generator/model.json');
+    MODEL = await tf.loadLayersModel('./model/mnist-vae/model.json');
     console.log(MODEL);
     //console.log(MODEL.predict);
 }
